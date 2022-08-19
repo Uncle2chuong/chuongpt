@@ -1,0 +1,160 @@
+﻿@model IEnumerable<WebsiteBanHang.Models.CartModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+<script type="text/javascript">
+    $(function () {
+        $("#removecart").click(function () {
+            var model = {};
+            //lấy id sản phẩm
+            model.Id = $("#productid").val();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Remove", "Cart")',
+                data:  JSON.stringify(model) ,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    $('#CartCount').text(@Session["count"] - 1);
+                    $("#product-" + model.Id).remove();
+                },
+                error: function () {
+                    alert("Lỗi trong khi thêm vào giỏ hàng!");
+                }
+            });
+            return false;
+        });
+    });
+</script>
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+    <div class="container">
+
+        <div class="row">
+            <main class="col-md-9">
+                <div class="card">
+
+                    <table class="table table-borderless table-shopping-cart">
+                        <thead class="text-muted">
+                            <tr class="small text-uppercase">
+                                <th scope="col">
+                                    SẢN PHẨM
+                                </th>
+                                <th scope="col" width="120">ĐỊNH LƯỢNG  </th>
+                                <th scope="col" width="120">GIÁ</th>
+                                <th scope="col" class="text-right" width="200"> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr id="product-@item.Product.Id">
+                                        <td>
+                                            <figure class="itemside">
+                                                <div class="aside"><img src="~/Content/images/items/@item.Product.Avatar" class="img-sm"></div>
+                                                <figcaption class="info">
+                                                    <a href="#" class="title text-dark">@item.Product.Name</a>
+                                                </figcaption>
+                                            </figure>
+                                        </td>
+                                        <td>
+                                            <input type="text" value="@item.Quantity" />
+                                        </td>
+                                        <td>
+                                            <div class="price-wrap">
+                                                <var class="price">@item.Product.Price</var>
+                                            </div> <!-- price-wrap .// -->
+                                        </td>
+                                        <td class="text-right">
+                                            <input type="hidden" value="@item.Product.Id" id="productid" />
+                                            <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light" data-toggle="tooltip"> <i class="fa fa-heart"></i></a>
+
+                                            <a href="" class="btn btn-light" id="removecart"> Xóa</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <p>Không có sản phẩm trong giỏ hàng</p>
+                            }
+
+
+                        </tbody>
+                    </table>
+
+                    <div class="card-body border-top">
+                        <a href="@Url.Action("Index", "Payment")" class="btn btn-primary float-md-right">Thanh Toán <i class="fa fa-chevron-right"></i> </a>
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Quay Lại Trang Chủ </a>
+                    </div>
+                </div> <!-- card.// -->
+
+                <div class="alert alert-success mt-3">
+                    <p class="icontext"><i class="icon text-success fa fa-truck"></i> Giao hàng miễn phí trong vòng 1-2 tuần</p>
+                </div>
+
+            </main> <!-- col.// -->
+            <aside class="col-md-3">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <label>Có phiếu giảm giá?</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="" placeholder="Mã giảm giá">
+                                    <span class="input-group-append">
+                                        <button class="btn btn-primary">Áp dụng</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div> <!-- card-body.// -->
+                </div>  <!-- card .// -->
+                <div class="card">
+                    <div class="card-body">
+                        <dl class="dlist-align">
+                            <dt>Tổng giá:</dt>
+                            <dd class="text-right">USD 568</dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>Chiết khấu:</dt>
+                            <dd class="text-right">USD 658</dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>Toàn bộ:</dt>
+                            <dd class="text-right  h5"><strong>$1,650</strong></dd>
+                        </dl>
+                        <hr>
+                        <p class="text-center mb-3">
+                            <img src="~/Content/images//misc/payments.png" height="26">
+                        </p>
+
+                    </div> <!-- card-body.// -->
+                </div>  <!-- card .// -->
+            </aside> <!-- col.// -->
+        </div>
+
+    </div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+<!-- ========================= SECTION  ========================= -->
+<section class="section-name border-top padding-y">
+    <div class="container">
+        <h6>Chính sách thanh toán và hoàn tiền</h6>
+        <p>
+            Bản thân nỗi đau là quan trọng, nhưng nỗi đau được tăng cường bởi quá trình tạo mỡ,
+            nhưng tôi cho nó thời gian để cắt giảm nó để tôi làm một số công việc lớn và nỗi đau.
+            Vì vậy, phần lớn, bất kỳ ai trong chúng ta cũng sẽ thực hiện bất kỳ loại công việc nào ngoại
+            trừ để tận dụng các mục tiêu từ nó. Nhưng nỗi đau trong phim là không thể lên án, trong sự
+            sung sướng nó muốn thoát khỏi nỗi đau bị co cụm trong đau đớn, không có kết quả. Họ là những
+            trường hợp ngoại lệ mà người khiếm thị khao khát, họ không nhìn thấy, họ là những người rũ bỏ
+            trách nhiệm với lỗi lầm đang xoa dịu những nhọc nhằn của tâm hồn.
+        </p>
+
+
+    </div><!-- container // -->
+</section>
+<!-- ========================= SECTION  END// ========================= -->

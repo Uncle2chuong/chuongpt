@@ -1,0 +1,210 @@
+﻿@model WebsiteBanHang.Context.Product
+@{
+    ViewBag.Title = "Detail";
+}
+<script type="text/javascript">
+    $(function () {
+        $("#addtocart").click(function () {
+            var model = {};
+            //lấy id sản phẩm
+            model.Id = @Model.Id;
+            // lấy số lượng đặt hàng
+            model.Quantity = $("#ipQuantity").val();
+            debugger;
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddToCart", "Cart")',
+                data:  JSON.stringify(model) ,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    alert("Thêm giỏ hàng thành công!")
+                    $('#CartCount').text(@Session["count"] + 1);
+                },
+                error: function () {
+                    alert("Lỗi trong khi thêm vào giỏ hàng!");
+                }
+            });
+            return false;
+        });
+    });
+</script>
+<section class="section-content bg-white padding-y">
+    <div class="container">
+
+        <!-- ============================ ITEM DETAIL ======================== -->
+        <div class="row">
+            <aside class="col-md-6">
+                <div class="card">
+                    <article class="gallery-wrap">
+                        <div class="img-big-wrap">
+                            <div> <a href="#"><img src="~/Content/images/items/@Model.Avatar"></a></div>
+                        </div> <!-- slider-product.// -->
+                        <div class="thumbs-wrap">
+                            <a href="#" class="item-thumb"> <img src="~/Content/images/items/15.jpg"></a>
+                            <a href="#" class="item-thumb"> <img src="~/Content/images/items/15-1.jpg"></a>
+                            <a href="#" class="item-thumb"> <img src="~/Content/images/items/15-2.jpg"></a>
+                            <a href="#" class="item-thumb"> <img src="~/Content/images/items/15-1.jpg"></a>
+                        </div> <!-- slider-nav.// -->
+                    </article> <!-- gallery-wrap .end// -->
+                </div> <!-- card.// -->
+            </aside>
+            <main class="col-md-6">
+                <article class="product-info-aside">
+
+                    <h2 class="title mt-3">@Model.Name </h2>
+
+                    <div class="rating-wrap my-3">
+                        <ul class="rating-stars">
+                            <li style="width:80%" class="stars-active">
+                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </li>
+                            <li>
+                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </li>
+                        </ul>
+                        <small class="label-rating text-muted">132 nhận xét</small>
+                        <small class="label-rating text-success"> <i class="fa fa-clipboard-check"></i> 154 đơn đặt hàng </small> 
+                    </div> <!-- rating-wrap.// -->
+
+                    <div class="mb-3">
+                        <var class="price h4">@Model.Price</var>
+                        <span class="text-muted">VND bao gồm VAT</span>
+                    </div> <!-- price-detail-wrap .// -->
+
+                    <p>
+                        @Model.ShortDes
+                    </p>
+
+
+                    <dl class="row">
+                        <dt class="col-sm-3">Nhà chế tạo</dt>
+                        <dd class="col-sm-9"><a href="#">Great textile Ltd.</a></dd>
+
+                        <dt class="col-sm-3">Bảo hành</dt>
+                        <dd class="col-sm-9">2 năm</dd>
+
+                        <dt class="col-sm-3">Thời gian giao hàng</dt>
+                        <dd class="col-sm-9">3-4 ngày</dd>
+
+                        <dt class="col-sm-3">Tính sẵn có</dt>
+                        <dd class="col-sm-9">
+                            trong kho
+                        </dd>
+                    </dl>
+
+                    <div class="form-row  mt-4">
+                        <div class="form-group col-md flex-grow-0">
+                            <div class="input-group mb-3 input-spinner">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-light" type="button" id="button-plus"> + </button>
+                                </div>
+                                <input type="text" id="ipQuantity" class="form-control" value="1">
+                                <div class="input-group-append">
+                                    <button class="btn btn-light" type="button" id="button-minus"> &minus; </button>
+                                </div>
+                            </div>
+                        </div> <!-- col.// -->
+                        <div class="form-group col-md">
+                            <a href="#" id="addtocart" class="btn  btn-primary">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="text" h>Thêm vào giỏ hàng</span>
+                            </a>
+                        </div> <!-- col.// -->
+                    </div> <!-- row.// -->
+                    
+
+                </article> <!-- product-info-aside .// -->
+            </main> <!-- col.// -->
+        </div> <!-- row.// -->
+        <!-- ================ ITEM DETAIL END .// ================= -->
+
+
+    </div> <!-- container .//  -->
+</section>
+
+<!-- ========================= SECTION CONTENT END// ========================= -->
+<!-- ========================= SECTION  ========================= -->
+<section class="section-name padding-y bg">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-8">
+                <h5 class="title-description">Sự miêu tả</h5>
+                @Model.FullDescription
+
+            </div> <!-- col.// -->
+
+            <aside class="col-md-4">
+
+                <div class="box">
+
+                    <h5 class="title-description">Các tập tin</h5>
+                    <p>
+                        Bản thân nỗi đau là quan trọng, nhưng nỗi đau được tăng cường 
+                        bởi quá trình tạo mỡ, nhưng tôi cho nó thời gian để cắt giảm nó
+                        để tôi làm một số công việc lớn và nỗi đau. Vì vậy, phần lớn, bất
+                        kỳ ai trong chúng ta cũng sẽ thực hiện bất kỳ loại công việc nào
+                        ngoại trừ để tận dụng các mục tiêu từ nó. Nhưng nỗi đau trong phim
+                        là không thể lên án, trong sự sung sướng nó muốn thoát khỏi nỗi
+                        đau bị co cụm trong đau đớn, không có kết quả. Họ là những trường
+                        hợp ngoại lệ mà người khiếm thị khao khát, họ không nhìn thấy, họ
+                        là những người rũ bỏ trách nhiệm với lỗi lầm đang xoa dịu những nhọc nhằn của tâm hồn.
+                    </p>
+
+                    <h5 class="title-description">Video</h5>
+
+
+                    <article class="media mb-3">
+                        <a href="#"><img class="img-sm mr-3" src="~/Content/images/posts/3.jpg"></a>
+                        <div class="media-body">
+                            <h6 class="mt-0"><a href="#">Làm thế nào để sử dụng mặt hàng này</a></h6>
+                            <p class="mb-2">
+                                Ngày mai có rất nhiều freestyle, không có thai. Không sợ sô cô la trước hoặc sau khi xung đột
+
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="media mb-3">
+                        <a href="#"><img class="img-sm mr-3" src="~/Content/images/posts/2.jpg"></a>
+                        <div class="media-body">
+                            <h6 class="mt-0"><a href="#">Mẹo và thủ thuật mới</a></h6>
+                            <p class="mb-2"> Ngày mai có rất nhiều freestyle, không có thai. Không sợ sô cô la trước hoặc sau khi xung đột </p>
+                        </div>
+                    </article>
+                </div> <!-- box.// -->
+            </aside> <!-- col.// -->
+        </div> <!-- row.// -->
+
+    </div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+<!-- ========================= SECTION SUBSCRIBE  ========================= -->
+<section class="padding-y-lg bg-light border-top">
+    <div class="container">
+
+        <p class="pb-2 text-center">Cung cấp các xu hướng sản phẩm mới nhất và tin tức ngành trực tiếp đến hộp thư đến của bạn</p>
+
+        <div class="row justify-content-md-center">
+            <div class="col-lg-4 col-sm-6">
+                <form class="form-row">
+                    <div class="col-8">
+                        <input class="form-control" placeholder="Email của bạn" type="email">
+                    </div> <!-- col.// -->
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-block btn-warning"> <i class="fa fa-envelope"></i> Đặt mua </button>
+                    </div> <!-- col.// -->
+                </form>
+                <small class="form-text">Chúng tôi sẽ không bao giờ chia sẻ địa chỉ email của bạn với bên thứ ba.</small>
+            </div> <!-- col-md-6.// -->
+        </div>
+
+
+    </div>
+</section>
+<!-- ========================= SECTION SUBSCRIBE END// ========================= -->
