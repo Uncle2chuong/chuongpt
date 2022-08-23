@@ -1,0 +1,100 @@
+﻿@model IEnumerable<WebsiteBanHang.Context.Product>
+@{
+    ViewBag.Title = "Trash";
+}
+<p>s</p>
+<div class="content-wrapper">
+
+    <section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <section>
+                                <h2 style="text-align:center">Thùng Rác Sản Phẩm</h2>
+
+                                <p>
+                                    @Html.ActionLink("Quay lại danh sách", "Index")
+                                </p>
+                                <table class="table">
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Name)
+                                        </th>
+                                        <th style="width:400px;">
+                                            @Html.DisplayNameFor(model => model.Avatar)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Slug)
+                                        </th>
+                                        <th>
+                                            Chức Năng
+                                        </th>
+                                        @*<th>
+                                                @Html.DisplayNameFor(model => model.ShowOnHomePage)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.DisplayOrder)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Deleted)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.CreatedOnUtc)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.UpdatedOnUtc)
+                                            </th>*@
+                                        <th></th>
+                                    </tr>
+
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Name)
+                                            </td>
+                                            <td>
+                                                <img style="width:30%;height:30%;" src="~/Content/images/items/@Html.DisplayFor(modelItem => item.Avatar)" alt="Alternate Text" />
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Slug)
+                                            </td>
+                                            @*<td>
+                                                    @Html.DisplayFor(modelItem => item.ShowOnHomePage)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.DisplayOrder)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Deleted)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.CreatedOnUtc)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.UpdatedOnUtc)
+                                                </td>*@
+                                            <td>
+                                                <a href="@Url.Action("ReTrash", "Product", new { id = item.Id })">ReTrash</a> |
+                                                <a href="@Url.Action("Delete", "Product", new { id = item.Id })">Delete</a>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </table>
+                                @*<script>
+                                        function retrash_success() {
+                                            alert("Khôi phục thành công!");
+                                        }
+                                    </script>*@
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

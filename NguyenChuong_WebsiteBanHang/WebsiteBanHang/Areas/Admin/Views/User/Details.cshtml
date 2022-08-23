@@ -1,0 +1,73 @@
+﻿@model WebsiteBanHang.Context.Users
+@{
+    ViewBag.Title = "Details";
+}
+<p>á</p>
+<div class="content-wrapper">
+
+    <section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 style="text-align:center">Chi Tiết Người Dùng</h2>
+
+                            <div>
+
+                                <hr />
+                                <dl class="dl-horizontal">
+                                    <dt>
+                                        Tên
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.FirstName)
+                                    </dd>
+
+                                    <dt>
+                                        Họ
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.LastName)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Email)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Email)
+                                    </dd>
+
+                                    <dt>
+                                        Mật khẩu
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Password)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.IsAdmin)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.IsAdmin)
+                                    </dd>
+
+                                </dl>
+                            </div>
+                            <p>
+                                @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.Id }) |
+                                @Html.ActionLink("Quay lại", "Index")
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

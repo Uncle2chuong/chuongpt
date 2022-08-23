@@ -1,6 +1,7 @@
-﻿@using PagedList;
+﻿@*@model IEnumerable<webisteBanHang.Context.Product>*@
+@using PagedList;
 @using PagedList.Mvc;
-@model PagedList.IPagedList<WebsiteBanHang.Context.Category>
+@model PagedList.IPagedList<WebsiteBanHang.Context.Product>
 @{
     ViewBag.Title = "Index";
 }
@@ -36,6 +37,8 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+
 <div class="content-wrapper">
 
     <section class="content">
@@ -45,8 +48,8 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h2 style="text-align:center">Quản Lí Danh Mục</h2>
-                            @using (Html.BeginForm("Index", "Category", FormMethod.Get))
+                            <h2 style="text-align:center">Quản Lí Sản Phẩm</h2>
+                            @using (Html.BeginForm("Index", "Product", FormMethod.Get))
                             {
                                 <p>
                                     Tìm tên sản phẩm: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
@@ -55,33 +58,32 @@
 
                                 </p>
                             }
-                            <button style="width: 150px; height: 40px; border-radius:10px"><a href="https://localhost:44381/Admin/Category/Create">Thêm Danh Mục</a></button>
-                            <button style="width: 150px; height: 40px; border-radius:10px; margin-left:78%;"><a href="https://localhost:44381/Admin/Category/Trash">Thùng Rác</a></button>
-                            <table class="table">
+                            <button style="width: 150px; height: 40px; border-radius:10px"><a href="https://localhost:44381/Admin/Product/Create">Thêm Sản phẩm</a></button>
+                            <button style="width: 150px; height: 40px; border-radius:10px; margin-left:78%;"><a href="https://localhost:44381/Admin/Product/Trash">Thùng Rác</a></button>
+                            <table class="table ">
                                 <tr>
                                     <th>
                                         Tên
                                     </th>
                                     <th>
                                         Hình
-                                        @*<th>
-                    @Html.DisplayNameFor(model => model.FirstOrDefault().Slug)
-                </th>*@
-                                        @*<th>
-                    Hiện trên web
-                </th>*@
-                                    <th>
-                                        Thứ tự hiện thị
                                     </th>
-                                    @*<th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Deleted)
-            </th>*@
                                     <th>
-                                        Ngày giờ thêm
+                                        Danh mục
                                     </th>
-                                    @*<th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().UpdateOnUtc)
-            </th>*@
+                                    <th>
+                                        Chi tiết
+                                    </th>
+                                    <th>
+                                        Mô tả
+                                    </th>
+                                    <th>
+                                        Giá
+                                    </th>
+                                    <th>
+                                        Giá giảm
+                                    </th>
+
                                     <th></th>
                                 </tr>
 
@@ -92,27 +94,24 @@
                                             @Html.DisplayFor(modelItem => item.Name)
                                         </td>
                                         <td>
-                                            <img style="width:110px;height:30%;" src="~/Content/images/items/@Html.DisplayFor(modelItem => item.Avatar)" alt="Alternate Text" />
+                                            <img style="width:50px;height:10%;" src="~/Content/images/items/@Html.DisplayFor(modelItem => item.Avatar)" alt="Alternate Text" />
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CategoryId)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ShortDes)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FullDescription)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Price)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.PriceDiscount)
                                         </td>
 
-                                        @*<td>
-                    @Html.DisplayFor(modelItem => item.Slug)
-                </td>*@
-                                        @*<td>
-                    @Html.DisplayFor(modelItem => item.ShowOnHomePage)
-                </td>*@
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.DisplayOrder)
-                                        </td>
-                                        @*<td>
-                    @Html.DisplayFor(modelItem => item.Deleted)
-                </td>*@
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.CreatedOnUtc)
-                                        </td>
-                                        @*<td>
-                    @Html.DisplayFor(modelItem => item.UpdateOnUtc)
-                </td>*@
                                         <td>
                                             @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.Id }) |
                                             @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }) |
@@ -121,6 +120,7 @@
                                     </tr>
                                 }
                             </table>
+
                             Trang @(Model.PageCount<Model.PageNumber ? 0: Model.PageNumber) của  @Model.PageCount
                             @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currenFilter = ViewBag.currenFilter }))
                         </div>

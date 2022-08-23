@@ -1,0 +1,106 @@
+﻿@model WebsiteBanHang.Context.Category
+
+@{
+    ViewBag.Title = "Edit";
+}
+<p>a</p>
+
+<div class="content-wrapper">
+
+    <section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 style="text-align:center">Chỉnh Sửa Danh Mục</h2>
+
+                            @using (Html.BeginForm("Edit", "Category", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-horizontal">
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.HiddenFor(model => model.Id)
+
+                                    <div class="form-group">
+                                        <h6 class="control-label col-md-2">Tên</h6>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        Hình ảnh
+                                        <div class="col-md-10">
+
+                                            @Html.EditorFor(model => model.Avatar, new { htmlAttributes = new { @class = "form-control" } })
+                                            @*@Html.EditorFor(model => model.Avatar, new { htmlAttributes = new {@type = "file", @name = "ImageUpLoad" } })*@
+
+                                            @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="col-md-10">
+                                            <a>Thay đổi ảnh: </a>
+                                            <input type="file" name="ImageUpLoad" />
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        <h6 class="control-label col-md-2">Hiện trên web</h6>
+                                        <div class="col-md-10">
+                                            <div class="checkbox">
+                                                @Html.EditorFor(model => model.ShowOnHomePage)
+                                                @Html.ValidationMessageFor(model => model.ShowOnHomePage, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <h6 class="control-label col-md-2">Thứ tự hiển thị</h6>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.DisplayOrder, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.DisplayOrder, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+
+
+                                    @*<div class="form-group">
+                                            @Html.LabelFor(model => model.CreatedOnUtc, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.CreatedOnUtc, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.CreatedOnUtc, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.UpdateOnUtc, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.UpdateOnUtc, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.UpdateOnUtc, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>*@
+
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <input type="submit" value="Lưu" class="btn btn-default" />
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                            <div>
+                                @Html.ActionLink("Quay lại", "Index")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

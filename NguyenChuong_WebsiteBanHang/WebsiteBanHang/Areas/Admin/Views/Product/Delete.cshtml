@@ -1,0 +1,111 @@
+﻿@model WebsiteBanHang.Context.Product
+
+@{
+    ViewBag.Title = "Delete";
+}
+<div class="content-wrapper">
+
+    <section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 style="text-align:center">Xóa Sản Phẩm</h2>
+
+                            <h3>Bạn có muốn xóa?</h3>
+                            <div>
+                                <hr />
+                                <dl class="dl-horizontal">
+                                    <dt>
+                                        Tên
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Name)
+                                    </dd>
+
+                                    <dt>
+                                        Hình
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Avatar)
+                                    </dd>
+
+                                    <dt>
+                                        Danh mục
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.CategoryId)
+                                    </dd>
+
+                                    <dt>
+                                        Chi tiết
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.ShortDes)
+                                    </dd>
+
+                                    <dt>
+                                        Mô tả
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.FullDescription)
+                                    </dd>
+
+                                    <dt>
+                                        Giá
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Price)
+                                    </dd>
+
+                                    <dt>
+                                        Giá đã giảm
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.PriceDiscount)
+                                    </dd>
+
+                                    <dt>
+                                        Thể loại
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.TypeId)
+                                    </dd>
+
+                                    <dt>
+                                        Thương hiệu
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.BrandId)
+                                    </dd>
+
+                                </dl>
+
+                                @using (Html.BeginForm("Delete", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    <div class="form-actions no-color">
+                                        <input type="submit" value="Xóa" class="btn btn-default" /> |
+                                        @Html.ActionLink("Quay lại", "Index")
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

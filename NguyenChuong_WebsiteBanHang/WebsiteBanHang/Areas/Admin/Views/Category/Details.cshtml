@@ -1,0 +1,85 @@
+﻿@model WebsiteBanHang.Context.Category
+
+@{
+    ViewBag.Title = "Details";
+}
+<p>a</p>
+
+<div class="content-wrapper">
+
+    <section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <h2 style="text-align:center">Chi Tiết Danh Mục</h2>
+
+                                <dl class="dl-horizontal">
+                                    <dt>
+                                        Tên
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Name)
+                                    </dd>
+
+                                    <dt>
+                                        Hình
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Avatar)
+                                    </dd>
+
+
+
+                                    <dt>
+                                        Hiển trên web
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.ShowOnHomePage)
+                                    </dd>
+
+                                    <dt>
+                                        Thứ tự hiển thị
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.DisplayOrder)
+                                    </dd>
+
+
+
+                                    <dt>
+                                        Ngày giờ thêm
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.CreatedOnUtc)
+                                    </dd>
+
+                                    @*<dt>
+                                            @Html.DisplayNameFor(model => model.UpdateOnUtc)
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.UpdateOnUtc)
+                                        </dd>*@
+
+                                </dl>
+                            </div>
+                            <p>
+                                @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.Id }) |
+                                @Html.ActionLink("Quay lại", "Index")
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

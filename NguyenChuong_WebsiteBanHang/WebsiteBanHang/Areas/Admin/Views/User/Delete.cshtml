@@ -1,0 +1,79 @@
+﻿@model WebsiteBanHang.Context.Users
+
+@{
+    ViewBag.Title = "Delete";
+}
+<p>á</p>
+<div class="content-wrapper">
+
+    <section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <h2 style="text-align:center">Xóa Người Dùng</h2>
+
+                        <h3>Bạn có muốn xóa?</h3>
+                        <div>
+
+                            <hr />
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    Tên
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.FirstName)
+                                </dd>
+
+                                <dt>
+                                    Họ
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.LastName)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Email)
+                                </dd>
+
+                                <dt>
+                                    Mật khẩu
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Password)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.IsAdmin)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.IsAdmin)
+                                </dd>
+
+                            </dl>
+
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-actions no-color">
+                                    <input type="submit" value="Xóa" class="btn btn-default" /> |
+                                    @Html.ActionLink("Quay lại", "Index")
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

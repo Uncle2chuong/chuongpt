@@ -1,0 +1,71 @@
+﻿@model IEnumerable<WebsiteBanHang.Context.Order>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="content-wrapper">
+
+    <section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 style="text-align:center">Quản Lí Đơn Hàng</h2>
+                            <table class="table">
+                                <tr>
+                                    <th>
+                                        Tên
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.UserId)
+                                    </th>
+
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Status)
+                                    </th>
+                                    <th>
+                                        Ngày đặt
+                                    </th>
+                                    <th></th>
+                                </tr>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.UserId)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Status)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CreatedOnUtc)
+                                        </td>
+                                        <td>
+
+                                            @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }) |
+                                            @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
+                                        </td>
+                                    </tr>
+                                }
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
